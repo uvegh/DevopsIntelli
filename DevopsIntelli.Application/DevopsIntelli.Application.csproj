@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DevopsIntelli.Infrastructure\DevopsIntelli.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
