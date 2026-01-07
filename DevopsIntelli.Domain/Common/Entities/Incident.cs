@@ -72,5 +72,15 @@ public class Incident : BaseEntity
             return newIncident;
 
         }
+
+    public  void AddAnalysis(double analysisConfidence, string analysis)
+    {
+        if (analysisConfidence < 0 || analysisConfidence > 1)
+            throw new ArgumentException("Analysis must be in between 0 to 1 ", nameof(analysisConfidence));
+        Analysis = analysis;
+        AnalysisConfidence = analysisConfidence;
+        UpdatedAt = DateTime.UtcNow;
+    }
+
     }
 
