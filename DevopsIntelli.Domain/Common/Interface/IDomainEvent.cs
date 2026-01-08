@@ -6,8 +6,9 @@ namespace DevopsIntelli.Domain.Common.Interface;
 
 public interface IDomainEvent
 {
-    public DateTime CreatedAt { get; }
-    public DateTime UpdatedAt { get; }
+   
+    public DateTime OccuredAt{ get; }
+    public DateTime? UpdatedAt { get; }
     public Guid EventId {get;}
 
 }

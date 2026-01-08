@@ -73,14 +73,39 @@ public class Incident : BaseEntity
 
         }
 
-    public  void AddAnalysis(double analysisConfidence, string analysis)
+    public  void AddAnalysis(double analysisConfidence, string analysis, string
+        tenantId)
     {
         if (analysisConfidence < 0 || analysisConfidence > 1)
             throw new ArgumentException("Analysis must be in between 0 to 1 ", nameof(analysisConfidence));
         Analysis = analysis;
         AnalysisConfidence = analysisConfidence;
         UpdatedAt = DateTime.UtcNow;
+
+        var incidentAnalyzedEvent = new IncidentAnalyzedEvent
+        {
+            OccuredAt = DateTime.UtcNow,
+            EventId=Guid.NewGuid(),
+            TenantId= tenantId,
+            Confidence=analysisConfidence
+
+        };
+        RaiseDomainEvent(incidentAnalyzedEvent);
     }
 
+    public void IncidentResolved()
+    {
+        Status = IncidentStatus.Resolved;
+        var incidentResolved = new IncidentResolvedEvent
+        {
+            EventId = Guid.NewGuid(),
+            OccuredAt = DateTime.UtcNow,
+            
+            
+        };
+
+
+
+    }
     }
 
