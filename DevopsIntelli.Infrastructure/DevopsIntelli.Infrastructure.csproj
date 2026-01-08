@@ -67,8 +67,12 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.0" />
   </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="MediatR" Version="14.0.0" />
+	</ItemGroup>
 
-  <ItemGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\DevopsIntelli.Domain\DevopsIntelli.Domain.csproj" />
   </ItemGroup>
 
