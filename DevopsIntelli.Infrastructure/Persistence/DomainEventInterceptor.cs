@@ -16,16 +16,16 @@ namespace DevopsIntelli.Infrastructure.Persistence
         }
 
         
-        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync (DbContextEventData eventData,
-            InterceptionResult<int> result,
-            CancellationToken cancellationToken =default,
-            CancellationToken ct =default
-            )
+      
+        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+       DbContextEventData eventData,
+       InterceptionResult<int> result,
+       CancellationToken cancellationToken = default)
         {
-            await _publisher.Publish(eventData);
+        
+            await PublishDomainEvents(eventData?.Context!, cancellationToken);
             return result;
         }
-
         private async Task PublishDomainEvents(DbContext context, CancellationToken ct)
         {
             if (context == null)
