@@ -10,9 +10,10 @@ namespace DevopsIntelli.Application.Features.Incidents.Commands;
 public class CreateIncidentCommandHandler:IRequestHandler<CreateIncidentCommand,CreateIncidentResult>
 {
 
-    public async Task Handle( CreateIncidentCommand req)
-    {
-        var incident = Incident.
+    
 
+    public Task<CreateIncidentResult> Handle(CreateIncidentCommand request, CancellationToken cancellationToken)
+    {
+        throw new NotImplementedException();
     }
 }
