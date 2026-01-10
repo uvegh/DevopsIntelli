@@ -1,0 +1,6 @@
+@DevopsIntelli_HostAddress = http://localhost:5233
+
+GET {{DevopsIntelli_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
