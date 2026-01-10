@@ -1,6 +1,9 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="docker-compose.yml" />
+  </Folder>
+  <Project Path="DevopsIntelli.API/DevopsIntelli.API.csproj" />
   <Project Path="DevopsIntelli.Application/DevopsIntelli.Application.csproj" />
   <Project Path="DevopsIntelli.Domain/DevopsIntelli.Domain.csproj" />
   <Project Path="DevopsIntelli.Infrastructure/DevopsIntelli.Infrastructure.csproj" />
-  <Project Path="DevopsIntelli/DevopsIntelli.API.csproj" />
 </Solution>
