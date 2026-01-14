@@ -2,6 +2,9 @@
   <Folder Name="/Solution Items/">
     <File Path="docker-compose.yml" />
   </Folder>
+  <Folder Name="/Solution Items/Tests/">
+    <Project Path="DevopsIntelli.Domain.Tests/DevopsIntelli.Domain.Tests.csproj" Id="360859a3-323e-4965-ad54-cdd0ddae9768" />
+  </Folder>
   <Project Path="DevopsIntelli.API/DevopsIntelli.API.csproj" />
   <Project Path="DevopsIntelli.Application/DevopsIntelli.Application.csproj" />
   <Project Path="DevopsIntelli.Domain/DevopsIntelli.Domain.csproj" />

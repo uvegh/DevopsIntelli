@@ -15,5 +15,6 @@ public class RedisConnectionService
             ConnectionMultiplexer.Connect(connString)
         );
     }
+    public ConnectionMultiplexer Connection => _connection.Value;
     public IDatabase Database => _connection.Value.GetDatabase();
 }
