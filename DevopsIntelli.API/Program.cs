@@ -1,3 +1,4 @@
+using DevopsIntelli.Infrastructure;
 using DevopsIntelli.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,8 @@ builder.Services.AddDbContext<DevopsIntelliDBContext>(options =>
     });
 
 });
-
+//DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration).AddControllers;
+builder.Services.AddInfrastructure(builder.Configuration);
 
 var app = builder.Build();
 

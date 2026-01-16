@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DevopsIntelli.Application\DevopsIntelli.Application.csproj" />
+    <ProjectReference Include="..\DevopsIntelli.Infrastructure\DevopsIntelli.Infrastructure.csproj" />
   </ItemGroup>    
 
 
