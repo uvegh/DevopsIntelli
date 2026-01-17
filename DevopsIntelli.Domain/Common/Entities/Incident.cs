@@ -9,7 +9,9 @@ public class Incident : BaseEntity
 {
     private Incident()
     {
-
+        DetectedBy = string.Empty;
+        RemdiationSteps = new List<string>();
+        AffectedService = string.Empty;
     }
     public string Title { get; private set; } = string.Empty;
     public string Description { get; private set; } = string.Empty;
