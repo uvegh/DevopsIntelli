@@ -71,10 +71,9 @@
 		<PackageReference Include="RedLock.net" Version="2.3.2" />
 		<PackageReference Include="StackExchange.Redis" Version="2.10.1" />
 	</ItemGroup>
-
-
 	<ItemGroup>
-    <ProjectReference Include="..\DevopsIntelli.Domain\DevopsIntelli.Domain.csproj" />
-  </ItemGroup>
+	  <ProjectReference Include="..\DevopsIntelli.Application\DevopsIntelli.Application.csproj" />
+	  <ProjectReference Include="..\DevopsIntelli.Domain\DevopsIntelli.Domain.csproj" />
+	</ItemGroup>
 
 </Project>
