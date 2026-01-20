@@ -1,4 +1,5 @@
-﻿using DevopsIntelli.Application.common.Interface;
+﻿using DevopsIntelli.Application.common.Exceptions;
+using DevopsIntelli.Application.common.Interface;
 using DevopsIntelli.Application.DTO;
 using DevopsIntelli.Domain.Common.Entities;
 using DevopsIntelli.Infrastructure.Data;
