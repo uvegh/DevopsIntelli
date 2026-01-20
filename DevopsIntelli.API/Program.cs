@@ -1,3 +1,4 @@
+using DevopsIntelli.API.Middleware;
 using DevopsIntelli.Infrastructure;
 using DevopsIntelli.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
@@ -22,8 +23,13 @@ builder.Services.AddDbContext<DevopsIntelliDBContext>(options =>
     });
 
 });
+builder.Services.AddHa(config =>config.UsePostgresqlStorage)
 //DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration).AddControllers;
 builder.Services.AddInfrastructure(builder.Configuration);
+//add exception handler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+//add problemdetails for response
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -50,10 +56,13 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+//use exception extension
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 
 app.Run();
