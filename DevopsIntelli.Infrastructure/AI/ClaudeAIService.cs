@@ -41,9 +41,23 @@ public class ClaudeAIService : IAIService
 
     public async Task<IncidentAnalysis> AnalyzeIncidentAsync(Guid incidentId, CancellationToken ct = default)
     {
-        var incident = await _context.Incident.FirstOrDefaultAsync(i=> i.Id==incidentId,ct);
-        if (incident == null) throw new NotFoundException(nameof(incident), incidentId);
+        try
+        {
+            var incident = await _context.Incident.FirstOrDefaultAsync(i => i.Id == incidentId, ct);
+            if (incident == null) throw new NotFoundException(nameof(incident), incidentId);
+
+
+            var prompt=  new claudePrompt()
+       
+        }
+        catch (Exception err)
+        {
+            _logger.LogError("failed to analyze content {err}", err);
+
+
+        }
     }
+       
 
     public Task<LogAnalysisResult> AnalyzeLogsAsync(string logContent, CancellationToken ct = default)
     {
