@@ -6,5 +6,7 @@ namespace DevopsIntelli.Application.common.Interface;
 
 public interface IEmbeddingService
 {
-    Task<float[]> GenerateEmbeddingAsync(string text, CancellationToken ct = default);
+    Task<float[]> GenerateSingleEmbeddingAsync(string text, CancellationToken ct = default);
+    Task<List<float[]>> GenerateBatchEmbeddingAsync(string text, CancellationToken ct = default);
+
 }
