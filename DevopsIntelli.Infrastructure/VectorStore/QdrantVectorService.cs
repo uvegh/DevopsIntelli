@@ -39,7 +39,7 @@ public class QdrantVectorService : IVectorService
     {
 
         try {
-
+            //create collection if it doesnt exist
             var collections = await  _client.ListCollectionsAsync();
             var exists = collections.Any(x => x == _qdrantOptions.CollectionName);
             _logger.LogDebug("collection  found :{exists}", exists);
@@ -58,6 +58,7 @@ public class QdrantVectorService : IVectorService
         }
         catch( Exception ex)
         {
+
             _logger.LogDebug("failed to create collection {ex}", ex);
         }
     }
@@ -65,7 +66,7 @@ public class QdrantVectorService : IVectorService
     public Task<List<VectorSearchResult>> SearchVectorAsync(float[] queryEmbedding, CancellationToken ct = default)
     {
        
-        throw new NotImplementedException();
+        throw ();
 
     }
 
