@@ -51,8 +51,16 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  Ollama:
+   image:  ollama/ollama:latest
+   container_name: deveops-intelligence-ollama
+   ports:
+     - "11434:11434"
+   volumes:
+   -  ollama_data:/root/.ollama \
 
 volumes:
   postgres_data:
   redis_data:
   qdrant_data:
+  ollama_data:

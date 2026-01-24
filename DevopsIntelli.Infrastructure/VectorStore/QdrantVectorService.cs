@@ -1,6 +1,7 @@
 ﻿
 
 
+using DevopsIntelli.Application.common.Exceptions;
 using Microsoft.Extensions.Options;
 using Qdrant.Client;
 using Qdrant.Client.Grpc;
@@ -63,15 +64,81 @@ public class QdrantVectorService : IVectorService
         }
     }
 
-    public Task<List<VectorSearchResult>> SearchVectorAsync(float[] queryEmbedding, CancellationToken ct = default)
+    public async Task StoreVectorAsync(
+        Guid id,
+        
+        float[] queryEmbedding,
+        Dictionary<string, object> metadata,
+        CancellationToken ct = default)
     {
-       
-        throw ();
+        try
+        {
+            var point = new PointStruct
+            {
+                Id = new PointId { Uuid = id.ToString() },
+                Vectors = queryEmbedding,
+                Payload =
+                {
+                    {
+                        "incident_id",id.ToString()
+                    },
+                    {
+                        "timestamp",DateTime.UtcNow.ToString("0")
+                    }
+                }
+
+
+            };
+
+            foreach (var (key,value) in metadata)
+            {
+                point.Payload[key] = value?.ToString() ?? string.Empty;
+                
+            }
+
+            await _client.UpsertAsync(collectionName:_qdrantOptions.CollectionName,points: new[] { point }, cancellationToken:ct )
+             _logger.LogDebug("Stored vector for ID: {Id}", id);
+        }
+
+        catch(Exception ex)
+        {
+            _logger.LogError("failed to create new pointstruct {ex}", ex); _logger.LogError("failed to create new pointstruct {ex}", ex);
+
+        }
 
     }
 
-    public Task StoreVectorAsync(Guid id, float[] embedding, Dictionary<string, object> metadata, CancellationToken ct = default)
+    
+
+    public async Task<List<VectorSearchResult>> SearchVectorAsync(double minScore=0.7,float[] queryEmbedding, CancellationToken ct = default)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var searchRes = await _client.SearchAsync(collectionName: _qdrantOptions.CollectionName, vector: queryEmbedding,
+                limit: (ulong)_qdrantOptions.TVectorSize, scoreThreshold: (float)minScore,
+                cancellationToken: ct);
+
+            //map search result to vectorsearchresult
+            _logger.LogDebug("Found {Count} similar vectors (min score: {MinScore})", searchRes.Count, minScore);
+            var res=  searchRes.Select(r => new VectorSearchResult
+            {
+                Id = Guid.Parse(r.Id.Uuid),
+                SimilaryScore = r.Score,
+                //convert to dictionary
+                Metadata = r.Payload.ToDictionary(kvp => kvp.Key,
+
+             kvp => (object)kvp.Value.StringValue)//convert to object
+
+            }).ToList();
+
+            return res;
+           
+        }
+        catch(NotFoundException ex)
+        {
+            throw new NotFoundException($"No similarties for vector found,{ex}", nameof(SearchVectorAsync))
+;        }
     }
+
+  
 }
