@@ -17,7 +17,7 @@ public interface IVectorService
         Dictionary<string, object> metadata,
         CancellationToken ct = default
         );
-    Task<List<VectorSearchResult>> SearchVectorAsync(float[] queryEmbedding, CancellationToken ct = default);
+    Task<List<VectorSearchResult>> SearchVectorAsync(double minScore,float[] query, CancellationToken ct = default);
    
 
 }
