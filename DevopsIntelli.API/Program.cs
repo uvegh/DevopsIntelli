@@ -2,6 +2,8 @@ using DevopsIntelli.API.Middleware;
 using DevopsIntelli.Infrastructure;
 using DevopsIntelli.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Hangfire.PostgreSql;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +25,6 @@ builder.Services.AddDbContext<DevopsIntelliDBContext>(options =>
     });
 
 });
-builder.Services.AddHa(config =>config.UsePostgresqlStorage)
 //DependencyInjection.AddInfrastructure(builder.Services, builder.Configuration).AddControllers;
 builder.Services.AddInfrastructure(builder.Configuration);
 //add exception handler
@@ -50,6 +51,10 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors("AllowAll");
+app.UseHangfireDashboard("/hangfire", new DashboardOptions
+{
+    Authorization = new[] { new HangfireAuthorizationFilter() }
+})
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

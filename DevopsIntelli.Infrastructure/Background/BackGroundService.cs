@@ -20,6 +20,11 @@ public class BackGroundService:IBackgroundService
 
     public void RecurringJob<T>(string jobId, Expression<Func<T, Task>> methodCall, string cronExpression)
     {
+        // Create or update recurring job
+        // Cron expression examples:
+        // "0 2 * * *" = Daily at 2 AM
+        // "*/5 * * * *" = Every 5 minutes
+        // "0 0 * * 0" = Weekly on Sunday at midnight
         hangFireLib.RecurringJob.AddOrUpdate(jobId, methodCall, cronExpression);
 
 
