@@ -1,4 +1,4 @@
-﻿using DevopsIntelli.Domain.Common.Enum;
+﻿using DevopsIntelli.Domain.Common.Enums;
 using DevopsIntelli.Domain.Common.Interface;
 using System;
 
