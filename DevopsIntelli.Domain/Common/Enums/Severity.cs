@@ -1,5 +1,4 @@
-﻿
-namespace DevopsIntelli.Domain.Common.Enum;
+﻿namespace DevopsIntelli.Domain.Common.Enums;
 
 public enum Severity
 {

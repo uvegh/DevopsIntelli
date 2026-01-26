@@ -1,5 +1,4 @@
-﻿using DevopsIntelli.Domain.Common.Enum;
-using DevopsIntelli.Domain.Common.Enums;
+﻿using DevopsIntelli.Domain.Common.Enums;
 using DevopsIntelli.Domain.Events;
 
 
@@ -38,7 +37,7 @@ public class Incident : BaseEntity
     //    DetectedBy = detectedBy;
     //}
 
-    public static Incident Create(string title, string tenantId, string description, Severity severity,  DetectionMethod detectionMethod,string detectedBy, string affectedService)
+    public static Incident Create(string title, string tenantId, string description, Severity severity, IncidentStatus status,  DetectionMethod detectionMethod,string detectedBy, string affectedService)
     {
         if (string.IsNullOrWhiteSpace(tenantId))
             throw new ArgumentException("Tenant Id is required", nameof(tenantId));

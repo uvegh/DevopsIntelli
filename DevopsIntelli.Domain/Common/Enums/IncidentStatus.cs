@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
-namespace DevopsIntelli.Domain.Common.Enum;
+namespace DevopsIntelli.Domain.Common.Enums;
 
 public enum  IncidentStatus
 {
