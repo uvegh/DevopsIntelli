@@ -7,9 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="xunit" Version="2.9.3" />
+    <PackageReference Include="xunit.v3" Version="3.2.2" />
   </ItemGroup>
-
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<!-- Other properties like TargetFramework, ImplicitUsings, etc. might also be here -->
+	</PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\DevopsIntelli.Domain\DevopsIntelli.Domain.csproj" />
   </ItemGroup>

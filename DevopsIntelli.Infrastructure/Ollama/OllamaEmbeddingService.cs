@@ -92,5 +92,7 @@ public class OllamaEmbeddingService : IEmbeddingService
         //}
         //return embeddings;
     }
+
+    
 }
     
