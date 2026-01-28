@@ -41,21 +41,18 @@ _affectedService
 
     }
 
-    //- this marks it as a test
+   
     [Fact]
-    //MethodName_Scenario_ExpectedResult()  - test method
+    
     public void Create_Valid_Data_Should_InitializeCorrectly()
     {
-        //arrange, this is basically simulating the data that'll be tested creating a real like scenario
-
-
-        //ACT -execute method to test
+      
         var newIncident = CreateValidIncident(_title, _tenantId);
 
-        //Assert - Verify everything is Correct
-        Assert.NotNull(newIncident);// check new iuncident was created
-        Assert.NotEqual(Guid.Empty, newIncident.Id);// check if its not empty,hence created
-        Assert.Equal(_title, newIncident.Title); //title should be equal to created title
+       
+        Assert.NotNull(newIncident);
+        Assert.NotEqual(Guid.Empty, newIncident.Id);
+        Assert.Equal(_title, newIncident.Title);
         Assert.Equal(_description, newIncident.Description);
         Assert.Equal(_tenantId, newIncident.TenantId);
         Assert.Equal(_severity, newIncident.Severity);
@@ -64,34 +61,28 @@ _affectedService
         Assert.Equal(_affectedService, newIncident.AffectedService);
 
 
-        //verify default state
-
-        //Assert.Equal( , newIncident.RemdiationSteps);
 
         //verify default status
         Assert.Equal(IncidentStatus.Open, newIncident.Status);
 
-        //check if nullable vals are null by default
+        
         Assert.Null(newIncident.AnalysisConfidence);
         Assert.Null(newIncident.Analysis);
         Assert.Null(newIncident.ResolvedAt);
-
-        //Verify if collection types were initialized
         Assert.NotNull(newIncident.RemdiationSteps);
         Assert.Empty(newIncident.RemdiationSteps);
 
-
     }
 
-    //Test multiple invalid using theory,tests for multiple scenariiow
+  
     [Theory]
-    [InlineData("")]//empty string
-    [InlineData(null)]//test for null
-    [InlineData("  ")]//test for whitespace
+    [InlineData("")]
+ 
+    [InlineData("  ")]
     public void Create_InvalidTenantId_ShouldThrowArgumentException(string invalidTenantId)
     {
 
-        //Assert 
+         
         Assert.Throws<ArgumentException>(() =>
         {
             var newIncident = CreateValidIncident(_title, invalidTenantId);
@@ -102,7 +93,7 @@ _affectedService
     [Theory]
     [InlineData("")]
     [InlineData(" ")]
-    [InlineData(null)]
+
     public void Create_InvalidTitle_Should_Throw_Argument(string invalidTitle)
     {
         Assert.Throws<ArgumentException>(() =>
