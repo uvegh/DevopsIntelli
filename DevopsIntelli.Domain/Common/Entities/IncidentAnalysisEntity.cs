@@ -7,7 +7,7 @@ namespace DevopsIntelli.Domain.Common.Entities;
 /// WHY: Avoid re-analyzing the same incident type repeatedly
 /// INTERVIEW: "I cache AI analysis to reduce API costs and improve response times"
 /// </summary>
-public class IncidentAnalysisEntity : BaseEntity
+public class IncidentAnalysis : BaseEntity
 {
     public Guid IncidentId { get; private set; }
     public string Summary { get; private set; } = string.Empty;
@@ -20,9 +20,9 @@ public class IncidentAnalysisEntity : BaseEntity
     // Navigation
     public Incident Incident { get; private set; } = null!;
 
-    private IncidentAnalysisEntity() { } // EF Core
+    private IncidentAnalysis() { } // EF Core
 
-    public static IncidentAnalysisEntity Create(
+    public static IncidentAnalysis Create(
         Guid incidentId,
         string summary,
         List<string> rootCauses,
@@ -30,7 +30,7 @@ public class IncidentAnalysisEntity : BaseEntity
         List<Guid> similarIncidentIds,
         double confidenceScore)
     {
-        return new IncidentAnalysisEntity
+        return new IncidentAnalysis
         {
             Id = Guid.NewGuid(),
             IncidentId = incidentId,
@@ -43,12 +43,13 @@ public class IncidentAnalysisEntity : BaseEntity
         };
     }
 
-    public List<string> GetRootCauses()
-        => JsonSerializer.Deserialize<List<string>>(RootCausesJson) ?? new();
+    //public List<string> GetRootCauses()
+    //    => JsonSerializer.Deserialize<List<string>>(RootCausesJson) ?? new();
 
-    public List<string> GetRecommendations()
-        => JsonSerializer.Deserialize<List<string>>(RecommendationsJson) ?? new();
 
-    public List<Guid> GetSimilarIncidentIds()
-        => JsonSerializer.Deserialize<List<Guid>>(SimilarIncidentIdsJson) ?? new();
+    //public List<string> GetRecommendations()
+    //    => JsonSerializer.Deserialize<List<string>>(RecommendationsJson) ?? new();
+
+    //public List<Guid> GetSimilarIncidentIds()
+    //    => JsonSerializer.Deserialize<List<Guid>>(SimilarIncidentIdsJson) ?? new();
 }
