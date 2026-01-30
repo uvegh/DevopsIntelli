@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DevopsIntelli.Application.DTO;
 
-public record IncidentAnalysis
+public record IncidentAnalysisDTO
 {
     public Guid IncidentId { get; init; }
     public string Summary { get; init; } = string.Empty;
